@@ -1,3 +1,5 @@
+import logging
+
 from aiohttp import web
 
 from settings import Settings
@@ -21,6 +23,7 @@ def make_app():
 
 
 def main():
+    logging.basicConfig()
     app = make_app()
     web.run_app(app)
 
