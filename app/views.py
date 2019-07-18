@@ -11,5 +11,4 @@ async def commento_handler(request):
 
 
 async def test_hander(request):
-    print(request)
     return web.Response(text='OK')

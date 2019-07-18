@@ -23,7 +23,7 @@ def make_app():
 
 
 def main():
-    logging.basicConfig()
+    logging.basicConfig(level=logging.DEBUG)
     app = make_app()
     web.run_app(app)
 
