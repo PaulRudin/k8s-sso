@@ -1,6 +1,9 @@
+import logging
+
 from aiohttp import web
 import commento
 
+logger = logging.getLogger(__name__)
 
 async def commento_handler(request):
     redirect = commento.verify(request)
@@ -10,5 +13,7 @@ async def commento_handler(request):
         return web.HTTPFound(redirect)
 
 
-async def test_hander(request):
+async def test_handler(request):
+    heads = '\n'.join(f'{k}: {v}' for k, v in request.headers.items())
+    logger.debug(heads)
     return web.Response(text='OK')
