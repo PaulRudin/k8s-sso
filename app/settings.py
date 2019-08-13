@@ -2,8 +2,14 @@ from pydantic import BaseSettings
 
 
 class Settings(BaseSettings):
-    commento_secret = b''
-    commento_url = 'https://comments.xamaral.com'
 
     class Config:
-        env_prefix = 'SSO_HELPER'
+        env_prefix = 'K8S_SSO_'
+
+    client_id = ''
+
+    client_secret = ''
+
+    client_base_url = ''
+
+    session_cookie_secret = b''

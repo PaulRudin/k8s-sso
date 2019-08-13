@@ -1,29 +1,42 @@
+import base64
 import logging
 
 from aiohttp import web
+import aiohttp_session
+from aiohttp_session.cookie_storage import EncryptedCookieStorage
 
 from settings import Settings
-from commento import setup_commento
+import client
 import views
 
 
 def setup_routes(app):
     app.router.add_routes([
-        web.get('/commento', views.commento_handler),
-        web.get('/test', views.test_handler)
+        web.get('/test', views.test_handler),
+        web.get('/oauth2/auth', views.auth_handler),
+        web.get('/oauth2/start', views.signin_handler),
+        web.get('/oauth2/callback', views.callback_handler),
     ])
 
 
-def make_app():
+def setup_sessions(app):
+    secret_key = app['settings'].session_cookie_secret
+    aiohttp_session.setup(
+        app, EncryptedCookieStorage(base64.urlsafe_b64decode(secret_key))
+    )
+
+
+def make_app(log_level=logging.DEBUG):
+    logging.basicConfig(level=log_level)
     app = web.Application()
     app['settings'] = Settings()
+    setup_sessions(app)
     setup_routes(app)
-    setup_commento(app)
+    client.setup_client(app)
     return app
 
 
 def main():
-    logging.basicConfig(level=logging.DEBUG)
     app = make_app()
     web.run_app(app)
 

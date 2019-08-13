@@ -16,4 +16,5 @@ FROM prod AS dev
 
 RUN pipenv install --dev --system
 
-CMD ["adev", "runserver", "--app-factory", "make_app", "app.py"]
+ENTRYPOINT ["adev"]
+CMD ["runserver", "--port=8080", "--app-factory", "make_app", "app.py"]

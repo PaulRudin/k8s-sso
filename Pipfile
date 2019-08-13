@@ -8,6 +8,9 @@ verify_ssl = true
 [packages]
 aiohttp = "*"
 pydantic = "*"
+aiohttp-devtools = "*"
+aiohttp-session = {extras = ["secure"],version = "*"}
+python-jose = {extras = ["cryptography"],version = "*"}
 
 [requires]
 python_version = "3.7"
