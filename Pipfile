@@ -4,6 +4,8 @@ url = "https://pypi.org/simple"
 verify_ssl = true
 
 [dev-packages]
+pytest = "*"
+python-dotenv = "*"
 
 [packages]
 aiohttp = "*"
@@ -11,6 +13,7 @@ pydantic = "*"
 aiohttp-devtools = "*"
 aiohttp-session = {extras = ["secure"],version = "*"}
 python-jose = {extras = ["cryptography"],version = "*"}
+pytest-aiohttp = "*"
 
 [requires]
 python_version = "3.7"

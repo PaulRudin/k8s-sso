@@ -11,10 +11,7 @@ class Client:
     id_keys = ['email', 'email_verified', 'name', 'nickname', 'picture']
 
     def __init__(self, client_id: str, client_secret: str, base_url: str,
-                 session=None):
-
-        if session is None:
-            self.session = aiohttp.ClientSession()
+                 session: aiohttp.ClientSession):
 
         self.client_id = client_id
         self.client_secret = client_secret
@@ -76,10 +73,15 @@ class Client:
 
 
 def setup_client(app):
-    settings = app['settings']
-    app['oidc_client'] = Client(
-        settings.client_id, settings.client_secret, settings.client_base_url
-    )
+    async def setup(app):
+        settings = app['settings']
+        client_session = app['client_session']
+        app['oidc_client'] = Client(
+            settings.client_id, settings.client_secret,
+            settings.client_base_url, client_session
+        )
+
+    app.on_startup.append(setup)
 
 
 def get_client(request):

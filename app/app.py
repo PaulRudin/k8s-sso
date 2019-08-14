@@ -1,6 +1,7 @@
 import base64
 import logging
 
+import aiohttp
 from aiohttp import web
 import aiohttp_session
 from aiohttp_session.cookie_storage import EncryptedCookieStorage
@@ -12,7 +13,7 @@ import views
 
 def setup_routes(app):
     app.router.add_routes([
-        web.get('/test', views.test_handler),
+        web.get('/hc', views.hc),
         web.get('/oauth2/auth', views.auth_handler),
         web.get('/oauth2/start', views.signin_handler),
         web.get('/oauth2/callback', views.callback_handler),
@@ -26,11 +27,18 @@ def setup_sessions(app):
     )
 
 
+def setup_client_session(app):
+    async def make_client_session(app):
+        app['client_session'] = aiohttp.ClientSession()
+    app.on_startup.append(make_client_session)
+
+
 def make_app(log_level=logging.DEBUG):
     logging.basicConfig(level=log_level)
     app = web.Application()
     app['settings'] = Settings()
     setup_sessions(app)
+    setup_client_session(app)
     setup_routes(app)
     client.setup_client(app)
     return app

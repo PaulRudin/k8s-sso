@@ -82,7 +82,5 @@ async def callback_handler(request):
     return web.HTTPUnauthorized(text='bad token exchange')
 
 
-async def test_handler(request):
-    heads = '\n'.join(f'{k}: {v}' for k, v in request.headers.items())
-    logger.debug(heads)
+async def hc(request):
     return web.Response(text='OK')
