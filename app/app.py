@@ -28,9 +28,15 @@ def setup_sessions(app):
 
 
 def setup_client_session(app):
-    async def make_client_session(app):
+
+    async def setup(app):
         app['client_session'] = aiohttp.ClientSession()
-    app.on_startup.append(make_client_session)
+
+    async def close(app):
+        await app['client_session'].close()
+
+    app.on_startup.append(setup)
+    app.on_shutdown.append(close)
 
 
 def make_app(log_level=logging.DEBUG):

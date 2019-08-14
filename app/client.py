@@ -55,7 +55,7 @@ class Client:
             if resp.status == 200:
                 body = await resp.json()
                 return jwt.decode(body['id_token'], self.client_secret,
-                                  algorithms=['HS256'],audience=self.client_id)
+                                  algorithms=['HS256'], audience=self.client_id)
 
         return None
 
