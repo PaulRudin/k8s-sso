@@ -5,13 +5,14 @@ python:
 install:
   - pip install pipenv
   - pipenv install --dev
-script: pytest
+script:
+  - pytest
+  - cat xamaral-5a06f7cb6cc5.json | docker login -u _json_key --password-stdin https://[HOSTNAME]
+  - make push
 before_install:
   - openssl aes-256-cbc -K $encrypted_5efe748433d5_key -iv $encrypted_5efe748433d5_iv
     -in k8s-ss0.repo.key.enc -out k8s-ss0.repo.key -d
   - sudo apt-get install -y git-crypt
   - git-crypt unlock k8s-ss0.repo.key
 
-after_success:
-  - cat xamaral-5a06f7cb6cc5.json | docker login -u _json_key --password-stdin https://[HOSTNAME]
-  - make push
+
