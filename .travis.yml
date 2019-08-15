@@ -12,8 +12,6 @@ before_install:
   - sudo apt-get install -y git-crypt
   - git-crypt unlock k8s-ss0.repo.key
 
-deploy:
-  provider: script
-  script:
-    - cat xamaral-5a06f7cb6cc5.json | docker login -u _json_key --password-stdin https://[HOSTNAME]
-    - make push
+after_success:
+  - cat xamaral-5a06f7cb6cc5.json | docker login -u _json_key --password-stdin https://[HOSTNAME]
+  - make push
