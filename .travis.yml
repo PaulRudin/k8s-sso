@@ -12,5 +12,5 @@ before_install:
   curl -L https://github.com/minrk/git-crypt-bin/releases/download/0.6.0/git-crypt > git-crypt
   echo "128817a63de17a5af03fe69241e453436c6c286c86dd37fb70ed9b3bf7171d7d  git-crypt" | shasum -a 256 -c -
   chmod a+x git-crypt
-  ./git-crypt unlock k8s-sso.repo.key
+  ./git-crypt unlock k8s-ss0.repo.key
 
