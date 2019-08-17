@@ -1,6 +1,6 @@
 GIT_SHA := $(shell git rev-parse --short HEAD)
 
-NAME =  eu.gcr.io/xamaral/k8s-sso
+NAME =  xamaral/k8s-sso
 
 docker:
 	docker build . --target prod -t $(NAME):$(GIT_SHA) -t $(NAME):latest

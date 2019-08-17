@@ -1,0 +1,8 @@
+#!/bin/bash
+
+ROOT="$(dirname "$(dirname "$(readlink -fm "${BASH_SOURCE[0]}")")")"
+
+CMD="cd ${ROOT} && make push"
+
+eval ${CMD}
+
