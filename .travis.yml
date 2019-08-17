@@ -14,8 +14,6 @@ install:
   - pipenv install --dev
 
 script:
-  - pytest || travis_terminate 1
-  - cat xamaral-5a06f7cb6cc5.json | docker login -u _json_key --password-stdin https://eu.gcr.io
-  - make push
+  - pytest
 
 
