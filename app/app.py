@@ -23,7 +23,7 @@ def setup_routes(app):
 def setup_sessions(app):
     secret_key = app['settings'].session_cookie_secret
     aiohttp_session.setup(
-        app, EncryptedCookieStorage(base64.urlsafe_b64decode(secret_key))
+        app, EncryptedCookieStorage(secret_key)
     )
 
 
