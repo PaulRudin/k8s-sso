@@ -21,6 +21,11 @@ def setup_routes(app):
 
 
 def setup_sessions(app):
+    #aoihttp_session expects the key to be decoded; but we're mounting a secret
+    # that's automatically generated and made available to the app already
+    # decoded hence for testing pass through the decoded data.
+
+
     secret_key = app['settings'].session_cookie_secret
     aiohttp_session.setup(
         app, EncryptedCookieStorage(secret_key)
