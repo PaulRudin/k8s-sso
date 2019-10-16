@@ -16,6 +16,7 @@ class Client:
         self.client_id = client_id
         self.client_secret = client_secret
         self.base_url = yarl.URL(base_url)
+        self.session = session
         self.make_urls()
 
     def make_urls(self):

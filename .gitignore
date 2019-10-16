@@ -1,3 +1,6 @@
 *.py[cod]
 __pycache__
 k8s-ss0.repo.key
+.pytest_cache/
+.vscode/
+/telepresence.log

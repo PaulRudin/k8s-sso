@@ -12,11 +12,11 @@ logger = logging.getLogger(__name__)
 
 async def auth_handler(request):
     '''endpoint for nginx.ingress.kubernetes.io/auth-url. nginx makes a request
-    here, if it gets 401 or 403 it redirects to the signin handler, otherwise we
-    should give 200 and the response to the original url will proceed.
+    here, if it gets 401 or 403 it redirects to the signin handler, otherwise
+    we should give 200 and the response to the original url will proceed.
 
     '''
-    oidc_client = client.get_client(request) 
+    oidc_client = client.get_client(request)
 
     id_token = await oidc_client.get_id_token(request)
 
@@ -32,6 +32,7 @@ async def auth_handler(request):
 async def signin_handler(request):
     '''endpoint for nginx.ingress.kubernetes.io/auth_signin nginx redirects us here
     if the original auth_request gave something other than 200
+
     '''
     oidc_client = client.get_client(request)
 
