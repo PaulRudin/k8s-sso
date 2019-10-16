@@ -1,5 +1,8 @@
 language: python
 
+services:
+  - docker
+
 python:
   - '3.7'
 
@@ -16,4 +19,11 @@ install:
 script:
   - pytest
 
+deploy:
+  - echo "$DOCKER_HUB_PASSWORD" | docker login -u "$DOCKER_HUB_USERNAME" --password-stdin
+  - make push
 
+env:
+  global:
+  - secure: h0LMTipPFluP3fqa7eTO/Yni3pFwzNBt26mdQLXpBqNALbbugxgdj3SksoA/MccX6xppAQ2LC4JpODfmraNGKM9dRKe77T4UvMZQrln2JpP8/KdRQ60Fu7ehvm7VB+ZYObCG9zy3qvPEzJR+npsowCeU3S/1fcu+3lfa4gB0J58ZyCKEODl6zGXb/Wk3wIo79QdJFPitD77eHHvCKjQJm1IR0I1TDUlKPpfGIdrAXHsrYoDBOWfUkr8ffvwDnBi/33rMyMN9LO8GQRDRLssxPlLPo9i1gb3mHya38P/h0tKjONseFrrjAJ/QjMvr+PxMWZRil1xX0Pn+K58H8VrR4OfjP64gD9AyKPalWl1nWeiUFFtxCIilmUt0HCN6cUO8IpHMfxqxWjTmhNRbehLKo569W6LEdR5Fgd/2seGH1240C2Ve92RTN/XwLggvqXydgnWLVnUjCg2aKv24xJAvxvDmpc1LtRoLHLHNfn8BIl6u18/cAIib/fNJ7UXjny7gTX7Z/yRgj5K+wsH5ES374wlrdDkaGI0yfdtTBVfeXhxJJuZ3GvsPhBog3B2j9QPpJcmt3fxMD3KEg8+kx3tAnRX/rq7x7Hrn8ew+Fy02c9ePsF6mPVyzwcp5fsAG525PDPohSX9zQwlndM4DDLU8+hP9065J8o3z1t/OiJayKlk=
+  - secure: F22WhobUmnuxQzdhkQyAksQ2XsHuAav5cnKIik89pGqvXxSgYNcJJHRXoF7fkm+8dvbC/GgkmsoZ5+CxnX6bhD2OBD+VW9DlwpT0eN5FoQoAxbUfB+uIdOlfD0FoIztzBfuHwawLyZCbY9ziOiO6IPpYxrJQ0DoM7oNbOQ+cf/pOf1f1Orjxd/zxv7fWRuATYpWbSeBeY9hI1TEb5A9A3FywqrNacYClw0Xw8sWmbzp2a/soXnHpxJISpHEhG5lG9ZNWSwTCSy4JZSp3s7ctQcj6UXU17c1FJ3ePe7zyJhMJcGwBMsm+g7177PpZiELf8Rq2Un8S7D7nsG/ItND35w3wIkYJZaW4iOTeMqW/3Uu24jwULAYsV/YzigIcvl5k9cwO6qDkI4UAzkdR7DTX5YKt6xIFmcIRrvetGDO8HwXB/aS9Oi7l09cAA9MmJbEVGzY3mxMkrKUCml3FkKr3BBANPOO74KgSCIVhbXo6kQteuhOVzmqx4p4T+JPP33Ll4gWWZ56dHCs03/LZNG0Gv02s/BA3JWzw9ilnoCAGvSx2qZ/lWFAOtMLF3cms1QDKukeBfoAcPU1IQFU04+F8VrPxQyIAmXp3JGMeRTE/K0IsGIOy+25BULUrIqPh2VW/WbB1Ky1YSgRVSjuRY/+VHHk4VeUtlvCq5E+wPEDT5Ow=
